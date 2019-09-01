@@ -9,4 +9,9 @@ class Member extends Model
     protected $fillable = [
         'first_name', 'surname', 'email', 'contact', 'occupation', 'status'
     ];
+
+    public function borrowers()
+    {
+        return $this->hasMany('App\Borrower');
+    }
 }

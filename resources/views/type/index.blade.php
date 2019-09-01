@@ -5,7 +5,7 @@
 <div class="content-header">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0 text-dark">Categories</h1>
+          <h1 class="m-0 text-dark">Genre</h1>
         </div><!-- /.col -->
        
       </div><!-- /.row -->
@@ -15,12 +15,12 @@
     <div class="col-12">
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Categories Table</h3>
+          <h3 class="card-title">Genres</h3>
 
           <div class="card-tools">
             <div class="input-group input-group-sm" style="width: 150px;">
               <div class="input-group-append">
-                <button type="button" class="btn btn-flat btn-sm btn-success" data-toggle="modal" data-target="#create_category">Create Category</button>
+                <button type="button" class="btn btn-flat btn-sm btn-success" data-toggle="modal" data-target="#create_category">Add Genre</button>
               </div>
             </div>
           </div>
@@ -30,7 +30,7 @@
           <table class="table table-hover">
             <tr>
               <th>No.</th>
-              <th>Category</th>
+              <th>Genres</th>
               <th>Shelf</th>
               <th>Action</th>
             </tr>
@@ -77,7 +77,7 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <form class="form-horizontal" method="POST" action="{{ route('categories.store')}}">
+            <form class="form-horizontal" method="POST" action="{{ route('genres.store')}}">
             <div class="modal-body">
               @csrf
               @include('type.create')
@@ -102,7 +102,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form class="form-horizontal" method="POST" action="{{ route('categories.update','test')}}">
+      <form class="form-horizontal" method="POST" action="{{ route('genres.update','test')}}">
         {{method_field('patch')}}
         @csrf
       <div class="modal-body">
@@ -131,7 +131,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form class="form-horizontal" method="POST" action="{{ route('categories.destroy','test')}}">
+        <form class="form-horizontal" method="POST" action="{{ route('genres.destroy','test')}}">
           {{method_field('delete')}}
           @csrf
         <div class="modal-body mt-0 mb-0">

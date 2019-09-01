@@ -3,15 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Member;
 use App\Book;
+use App\Borrower;
 
-class MemberController extends Controller
+class BorrowerController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -19,7 +15,7 @@ class MemberController extends Controller
      */
     public function index()
     {
-
+      
     }
 
     /**
@@ -40,16 +36,18 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
-        $member = new Member;
+        $borrower = new Borrower;
 
-        $member->first_name = $request->input('first_name');
-        $member->surname = $request->input('surname');
-        $member->email = $request->input('email');
-        $member->contact = $request->input('contact');
-        $member->occupation = $request->input('occupation');
-        $member->status = $request->input('status');
+        $borrower->book_id = $request->input('book_id');
+        $borrower->member_id = $request->input('member_id');
+        $borrower->borrow_date = $request->input('borrow_date');
+        $borrower->return_date = $request->input('return_date');
+        $borrower->return_day = $request->input('return_day');
+        $borrower->total_days = $request->input('total_days');
+        $borrower->status = $request->input('status');
+        $borrower->amount = $request->input('amount');
 
-        $member->save();
+        $borrower->save();
 
         return back();
     }
@@ -62,9 +60,7 @@ class MemberController extends Controller
      */
     public function show($id)
     {
-        $member = Member::find($id);
-        $books = Book::all();
-        return view('member.show',compact('member','books'));
+        //
     }
 
     /**
@@ -85,18 +81,20 @@ class MemberController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $member = Member::findOrFail($request->member_id);
+        $borrower = Borrower::findOrFail($request->borrower_id);
 
-        $member->first_name = $request->input('first_name');
-        $member->surname = $request->input('surname');
-        $member->email = $request->input('email');
-        $member->contact = $request->input('contact');
-        $member->occupation = $request->input('occupation');
-        $member->status = $request->input('status');
+        $borrower->book_id = $request->input('book_id');
+        $borrower->member_id = $request->input('member_id');
+        $borrower->borrow_date = $request->input('borrow_date');
+        $borrower->return_date = $request->input('return_date');
+        $borrower->return_day = $request->input('return_day');
+        $borrower->total_days = $request->input('total_days');
+        $borrower->status = $request->input('status');
+        $borrower->amount = $request->input('amount');
 
-        $member->update();
+        $borrower->update();
 
         return back();
     }
@@ -109,9 +107,8 @@ class MemberController extends Controller
      */
     public function destroy(Request $request)
     {
-        $member = Member::findOrFail($request->member_id);
-        $member->delete();
-
+        $borrower = Borrower::findOrFail($request->borrower_id);
+        $borrower->delete();
         return back();
     }
 }

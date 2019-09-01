@@ -56,7 +56,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{ asset('dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
+          <img src="{{ asset('dist/img/avatar04.png')}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a  class="d-block">{{ auth()->user()->name}}</a>
@@ -78,10 +78,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('categories.index') }}" class="nav-link">
+                <a href="{{ route('genres.index') }}" class="nav-link">
                    <i class="nav-icon fa fa-folder-open-o"></i>
                    <p>
-                    Categories
+                    Genre
                    </p>
                  </a>
                </li>
@@ -97,7 +97,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <a href="{{ route('members_search') }}" class="nav-link">
                    <i class="nav-icon fa fa-address-card-o"></i>
                    <p>
-                    Members / Rent Book
+                    Members / Borrow Book
                    </p>
                  </a>
                </li>
