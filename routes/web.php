@@ -17,12 +17,18 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::group(['middleware' => ['auth']], function() {
+    Route::resource('roles','RoleController');
+    Route::resource('users','UserController');
+});
+
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('dashboard', 'DashboardController');
 Route::resource('genres', 'TypeController');
 Route::resource('books', 'BookController');
 Route::resource('members', 'MemberController');
 Route::resource('borrowers', 'BorrowerController');
+Route::resource('renews', 'RenewController');
 
 //routes for books search
 Route::get('/books_search', 'BookSearchController@index')->name('books_search');

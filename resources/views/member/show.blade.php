@@ -34,7 +34,10 @@
               <b>Email :</b> <a class="float-right">{{ $member->email }}</a>
             </li>
           </ul>
-
+          <button type="button" class="btn btn-dark btn-flat btn-sm"
+          
+          data-toggle="modal" data-target="#renew"
+          >Reg/Renew Membership</button>
         </div>
       </div>
 
@@ -77,28 +80,21 @@
               <td>{{ $borrow->amount }}</td>
                 <td>
                   <button type="button" class="btn btn-sm btn-flat btn-primary" 
-                  
-                  data-mybid = {{ $borrow->id }} data-mymid = {{ $borrow->member_id }} data-mybkid = {{ $borrow->book_id }} data-mybdate = {{ $borrow->borrow_date }}
-                  data-myrdate = {{ $borrow->return_date}}  data-myreturnDay = {{ $borrow->return_day }}  data-mytotal = {{ $borrow->total_days }}
-                  data-mystatus = {{ $borrow->status }} data-myamount = {{ $borrow->amount }}
-
+                  data-mybid = "{{ $borrow->id }}" data-mymid = "{{ $borrow->member_id }}" data-mybkid = "{{ $borrow->book_id }}" data-mybdate = "{{ $borrow->borrow_date }}"
+                  data-myrdate ="{{ $borrow->return_date}}" data-mystatus = "{{ $borrow->status }}" data-myreturnDay = "{{ $borrow->return_day }}" 
                   data-toggle="modal" data-target="#edit_borrow"><i class="fa fa-edit"></i></button>
-  
-      
-  
-                  <button type="button" class="btn btn-sm btn-flat btn-danger"
-                  
-                  data-mybid = {{ $borrow->id }}
-                  
+
+
+                  <button type="button" class="btn btn-sm btn-flat btn-danger"                  
+                  data-mybid = {{ $borrow->id }}                  
                   data-toggle="modal" data-target="#delete_borrow"><i class="fa fa-trash"></i></button>
 
 
-
                   <button type="button" class="btn btn-sm btn-flat btn-light"
-                  
-                  data-my = ""
-                  
-                  data-toggle="modal" data-target="#"><i class="fa fa-bookmark"></i></button>
+                  data-mybid = "{{ $borrow->id }}" data-mymid = "{{ $borrow->member_id }}" data-mybkid = "{{ $borrow->book_id }}" data-mybdate = "{{ $borrow->borrow_date }}"
+                  data-myrdate = "{{ $borrow->return_date}}"  data-myreturnDay = "{{ $borrow->return_day }}"  data-mytotal = "{{ $borrow->total_days }}"
+                  data-mystatus = "{{ $borrow->status }}" data-myamount = "{{ $borrow->amount }}"
+                  data-toggle="modal" data-target="#returned"><i class="fa fa-bookmark"></i></button>
                 </td>
               </tr>
               @endforeach
@@ -141,7 +137,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Edit Category</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Edit Book</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -195,6 +191,59 @@
     </div>
   </div>
 
+          <!-- Modal returned-->
+<div class="modal fade" id="returned" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Book Return status</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form class="form-horizontal" method="POST" action="{{ route('borrowers.update','test')}}">
+        {{method_field('patch')}}
+        @csrf
+      <div class="modal-body">
+      <input type="hidden" name="borrower_id" id="borrower_id" value="">
+        
+        @include('borrow.status')
+      </div>
+     
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm btn-flat" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary btn-sm btn-flat">Save</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+
+  <!-- Modal renew-->
+  <div class="modal fade" id="renew" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Renew Membership</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form class="form-horizontal" method="POST" action="{{ route('renews.store')}}">
+        <div class="modal-body">
+          @csrf
+          @include('renew.create')
+        </div>
+       
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm btn-flat" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary btn-sm btn-flat">Renew</button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
   <script>
     $('#edit_borrow').on('show.bs.modal', function (event) {
 
@@ -206,8 +255,8 @@ var borrow_date = button.data('mybdate')
 var return_date = button.data('myrdate')
 var return_day = button.data('myreturnDay')
 var total_days = button.data('mytotal')
-var status = button.data('status')
-var amount = button.data('amount')
+var status = button.data('mystatus')
+var amount = button.data('myamount')
 
 var modal = $(this)
 modal.find('.modal-body #borrower_id').val(borrower_id)
@@ -234,5 +283,34 @@ modal.find('.modal-body #amount').val(amount)
 
 })
   </script>
+
+
+<script>
+  $('#returned').on('show.bs.modal', function (event) {
+
+var button = $(event.relatedTarget) 
+var borrower_id = button.data('mybid')
+var book_id = button.data('mybkid')
+var member_id = button.data('mymid')
+var borrow_date = button.data('mybdate')
+var return_date = button.data('myrdate')
+var return_day = button.data('myreturnDay')
+var total_days = button.data('mytotal')
+var status = button.data('mystatus')
+var amount = button.data('myamount')
+
+var modal = $(this)
+modal.find('.modal-body #borrower_id').val(borrower_id)
+modal.find('.modal-body #book_id').val(book_id)
+modal.find('.modal-body #member_id').val(member_id)
+modal.find('.modal-body #borrow_date').val(borrow_date)
+modal.find('.modal-body #return_date').val(return_date)
+modal.find('.modal-body #return_day').val(return_day)
+modal.find('.modal-body #total_days').val(total_days)
+modal.find('.modal-body #status').val(status)
+modal.find('.modal-body #amount').val(amount)
+
+})
+</script>
 
 @endsection

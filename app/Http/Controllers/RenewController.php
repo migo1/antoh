@@ -3,14 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Renew;
 
-class DashboardController extends Controller
+class RenewController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -18,10 +14,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-      //  $birthdays = User::role('client')->whereRaw('DAYOFYEAR(curdate()) <= DAYOFYEAR(dob) AND DAYOFYEAR(curdate())  >=  dayofyear(dob)')
-        //->orderByRaw('DAYOFYEAR(dob)')
-        //->paginate(1);
-       return view('dashboard.index');
+        //
     }
 
     /**
@@ -42,7 +35,15 @@ class DashboardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $renew = new Renew;
+
+        $renew->member_id = $request->input('member_id');
+        $renew->amount = $request->input('amount');
+        $renew->date = $request->input('date');
+
+        $renew->save();
+
+        return back();
     }
 
     /**

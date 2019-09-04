@@ -14,4 +14,9 @@ class Member extends Model
     {
         return $this->hasMany('App\Borrower');
     }
+
+    public function renews()
+    {
+        return $this->hasMany('App\Renew');
+    }
 }

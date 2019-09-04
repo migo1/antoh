@@ -90,9 +90,24 @@ class BorrowerController extends Controller
         $borrower->borrow_date = $request->input('borrow_date');
         $borrower->return_date = $request->input('return_date');
         $borrower->return_day = $request->input('return_day');
-        $borrower->total_days = $request->input('total_days');
+        $borrow = strtotime($borrower->return_date);
+        $return = strtotime($borrower->return_day);
+        $diff = $return - $borrow;
+        if ($diff > 0) {
+            $borrower->total_days = floor($diff / (60*60*24));
+        } else {
+            $borrower->total_days = 0;
+        }
+       
         $borrower->status = $request->input('status');
-        $borrower->amount = $request->input('amount');
+
+        if ($diff > 0) {
+            $borrower->amount = 50*$borrower->total_days;
+        } else {
+            $borrower->amount = 0;
+        }
+        
+        
 
         $borrower->update();
 

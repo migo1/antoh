@@ -33,9 +33,10 @@
                 </div>--}}
 
 
+
                 <input type="hidden" class="form-control" name="return_day" >
                 <input type="hidden" class="form-control" name="total_days" >
-                <input type="hidden" class="form-control" name="status" >
+                <input type="hidden" class="form-control" name="status" value="borrowed">
                 <input type="hidden" class="form-control" name="amount" >
 
 
