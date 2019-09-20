@@ -11,6 +11,6 @@ class Type extends Model
     ];
 
     public function books() {
-        return $this->hasMany('App\Type');
+        return $this->hasMany('App\Book');
     }
 }

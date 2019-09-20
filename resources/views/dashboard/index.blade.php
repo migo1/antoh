@@ -16,7 +16,7 @@
                   <div class="inner">
                     <h3>150</h3>
     
-                    <p>Available Users</p>
+                    <p>Available Genres</p>
                   </div>
                   <div class="icon">
                     <i class="ion ion-bag"></i>
@@ -60,7 +60,7 @@
                   <div class="inner">
                     <h3>150</h3>
     
-                    <p>Total Members</p>
+                    <p>Revenue</p>
                   </div>
                   <div class="icon">
                     <i class="ion ion-bag"></i>

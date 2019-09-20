@@ -11,10 +11,14 @@
      
     </div><!-- /.row -->
 </div>
-    
+@if ($message = Session::get('success'))
+<div class="alert alert-success">
+  <p>{{ $message }}</p>
+</div>
+@endif
 
 <div class="row">
-
+ 
 
         <div class="col-md-2"><br>
         <a class="btn btn-success btn-sm btn-flat" href="{{ route('members_search')}}">Refresh Page</a>

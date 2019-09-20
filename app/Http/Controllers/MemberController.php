@@ -51,7 +51,7 @@ class MemberController extends Controller
 
         $member->save();
 
-        return back();
+        return back()->with('success','Member created successfully');
     }
 
     /**

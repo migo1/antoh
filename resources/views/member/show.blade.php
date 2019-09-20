@@ -10,7 +10,11 @@
      
     </div>
 </div>
-
+@if ($message = Session::get('success'))
+<div class="alert alert-success">
+  <p>{{ $message }}</p>
+</div>
+@endif
 <div class="row">
     <div class="col-md-2">
 
@@ -105,6 +109,67 @@
         </div>
       </div>
   
+
+
+
+
+
+
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Mmebership payments</h3>
+  
+            <div class="card-tools">
+              <div class="input-group input-group-sm" style="width: 150px;">
+                <div class="input-group-append">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-body table-responsive p-0">
+            <table class="table table-hover">
+              <tr>
+                <th>date</th>
+                <th>Amount</th>
+                <th>Action</th>
+              </tr>
+          @foreach ($member->renews as $renew)
+                  
+              <tr>
+              <td>{{ $renew->date }}</td>
+              <td>{{ $renew->amount }}</td>
+                <td>
+                  <button type="button" class="btn btn-sm btn-flat btn-primary" 
+                  data-myrenid = "{{ $renew->id }}" data-mymid = "{{ $renew->member_id }}" 
+                  data-toggle="modal" data-target="#edit_borrow"><i class="fa fa-edit"></i></button>
+
+
+                  <button type="button" class="btn btn-sm btn-flat btn-danger"                  
+                  data-myrenid = {{ $renew->id }}                  
+                  data-toggle="modal" data-target="#delete_borrow"><i class="fa fa-trash"></i></button>
+
+
+                
+                </td>
+              </tr>
+              @endforeach
+  
+            </table>
+           {{-- {{ $books->links() }}--}}
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
   </div>
 
   <!-- Modal borrow_book-->

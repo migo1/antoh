@@ -49,7 +49,7 @@ class BorrowerController extends Controller
 
         $borrower->save();
 
-        return back();
+        return back()->with('success','book borrowed created successfully');
     }
 
     /**
